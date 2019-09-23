@@ -4,7 +4,7 @@ var itemModel =  require('../models/todomodel');
 var urlencodedParser = bodyParser.urlencoded({extended:false});
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://theo:puv775@cluster0-1d6yh.mongodb.net/test?retryWrites=true&w=majority', { useUnifiedTopology: true , useNewUrlParser: true });
+mongoose.connect('mongodb+srv://<user><pass>', { useUnifiedTopology: true , useNewUrlParser: true });
 
 
 
