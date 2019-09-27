@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 var itemModel =  require('../models/todomodel');
 
 var urlencodedParser = bodyParser.urlencoded({extended:false});
-
+// database authentication
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://<user><pass>', { useUnifiedTopology: true , useNewUrlParser: true });
 
@@ -11,8 +11,8 @@ mongoose.connect('mongodb+srv://<user><pass>', { useUnifiedTopology: true , useN
 
 
 module.exports=function(app){
-
-    app.get('/todo', function(req,res){
+    // GET request on /todo
+    app.get('/todo', function(req,res){ 
 
         itemModel.todo.find({},function(err,data){
         if(err) throw err;
@@ -20,19 +20,19 @@ module.exports=function(app){
 
     });
     });
-
+    //POST request on /todo
     app.post('/todo', urlencodedParser, function(req,res){
-        var newtodo = itemModel.todo(req.body).save(function(err,data){
+        var newtodo = itemModel.todo(req.body).save(function(err,data){ //add new item to
             if(err)throw err;
-            res.json({todos: data}); 
+            res.json({todos: data});   
         })
         
     });
-
-    app.delete('/todo/:item',function(req,res){
+    //DELETE the todo item
+    app.delete('/todo/:item',function(req,res){ // delete item specified in url
         itemModel.todo.find({item:req.params.item.replace(/\-/g," ") }).deleteOne(function(err,data){
             if(err) throw err;
-            res.json(data);
+            res.json(data);   // return json data to the view 
         });
         
 });

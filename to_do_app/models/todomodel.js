@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+
+//  data model
 var todoSchema = new mongoose.Schema(
     {
         item : String
